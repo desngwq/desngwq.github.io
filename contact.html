@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+		<link rel="image_src" href="http://is2150-22.comp.nus.edu.sg/IS2150/img/icon.png" />
+		<link rel="shortcut icon" type="image/x-icon" href="img/icon.jpg">
+        <title>Contact | Desmond Ng</title>
+        <link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="css/styles.css" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="css/bootstrap-responsive.css" rel="stylesheet">
+		<link href='http://fonts.googleapis.com/css?family=Fruktur' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Nova+Square' rel='stylesheet' type='text/css'>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		
+	</head>
+	
+	<body>
+		<div id="fb-root"></div>
+		<script>
+			(function(d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s); js.id = id;
+				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
+	
+		<script src="js/jquery-1.7.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('.carousel').carousel();
+			});
+		</script>
+		
+		<script>
+			
+
+		</script>
+			
+		<script src="js/jquery-1.9.1.min.js"></script>
+		<script src="js/jquery-1.9.0.js"></script>
+		<script>
+			$(document).ready(function()
+			{
+				$("#submitBtn").click(function(){
+					var valid = true;
+					
+					var msg="Incomplete form:\n";
+											
+					if (document.message.name.value == "" ) {
+						if (valid)//only receive focus if its the first error
+							document.message.name.focus();
+							document.message.name.style.border="solid 3px red";
+							msg+="You need to fill the name field!\n";
+							valid = false;
+					}
+					if (document.message.email.value == "" ) {
+						if (valid)
+						document.message.email.focus();
+						document.message.email.style.border="solid 3px red";
+						msg+="You need to fill in your email!\n";
+						valid = false;
+					}
+					
+					if (document.message.subject.value == "" ) {
+						if (valid)
+							document.message.subject.focus();
+						document.message.subject.style.border="solid 3px red";
+						msg+="You need to fill in the subject!\n";
+						valid = false;
+					}
+					
+					if (document.message.comments.value == "" ) {
+						if (valid)
+							document.message.comments.focus();
+						document.message.comments.style.border="solid 3px red";
+						msg+="You need to fill in the comments!\n";
+						valid = false;
+					}
+					
+					var testemail = document.message.email.value;
+					
+					if( /(.+)@(.+){2,}\.(.+){2,}/.test(testemail) ){} 
+					else {
+						msg += "Invalid Email!\n";
+						valid = false;
+					}	
+						
+
+					if (!valid){
+						alert(msg);
+						
+					}
+					else{
+						var name = document.message.name.value;
+						var subject = document.message.subject.value;
+						var message = $('textarea[name=comments]');
+						var email = document.message.email.value;
+						var data = '&name=' + name + '&email=' + email + '&subject='+ subject + '&message='  + encodeURIComponent(message.val());
+						
+						$.ajax({
+							url: "http://ezwebber.sg/JR/personal/sendme2.php", 
+							type: "GET",
+							data: data,
+							cache: false,
+							success: function(html){}
+					   });							
+						alert("Thank you for your message");
+						$('#message')[0].reset();
+						$('#submitBtn').slideToggle('slow', function() {
+                    });
+					}
+				});
+			});
+		</script>
+			
+
+		<!-- NAVBAR================================================== -->
+		<!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+		<div class="container">
+			<div class="navbar navbar-inverse">
+				<div class="navbar-inner">
+					<!-- Responsive Navbar -->
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>								
+					</a>
+		
+					<a class="brand" href="index.html">Ng Wei Quan Desmond</a>
+					<!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+					<div class="nav-collapse ">
+						<ul class="nav pull-right">
+							<li><a href="index.html"><naviTitle>About</naviTitle><br/><naviNote>More insides of me</naviNote></a></li>
+							<li><a href="resume.html"><naviTitle>Resume</naviTitle><br/><naviNote>My Experiences & Skills</naviNote></a></li>
+							<li><a href="gallery.html"><naviTitle>Gallery</naviTitle><br/><naviNote>Colours of my life</naviNote></a></li>
+							<li class="active"><a href="contact.html"><naviTitle>Contact</naviTitle><br/><naviNote>Get connnected with me</naviNote></a></li>		
+						</ul>
+					</div><!--/.nav-collapse -->
+				</div><!-- /.navbar-inner -->
+			</div><!-- /.navbar -->
+		</div>
+		
+		<div class="container" style="background-color: black; background-image:url(img/wallpaper.png); background-size: 100%; background-repeat:no-repeat;">
+			<div class="span8">
+				<div class="row">
+					<form id="message" method="post" name="message" class="form-horizontal">
+						<div class="span4">
+							<fieldset>
+								<div id="legend" class="">
+									<legend class="">Send a message</legend>
+								</div>
+								
+								<div class="control-group">
+								<!-- Text input -->
+									<label class="control-label" for="input01">Name</label>
+									<div class="controls">
+										<input placeholder="" class="input-xlarge" type="text" name="name" id="name">
+									</div>
+								</div>
+
+								<div class="control-group">
+									<!-- Text input -->
+									<label class="control-label" for="input01">Email Address</label>
+									<div class="controls">
+										<input placeholder="" class="input-xlarge" type="text" name="email" id="email">
+									</div>
+								</div>
+								
+								<div class="control-group">
+									<!-- Text input -->
+									<label class="control-label" for="input01">Subject</label>
+									<div class="controls">
+										<input placeholder="" class="input-xlarge" type="text" name="subject" id="subject">
+									</div>
+								</div>
+
+								<div class="control-group">
+									<!-- Textarea -->
+									<label class="control-label">Comments</label>
+									<div class="controls">
+										<div class="textarea">
+											<textarea class="" type="" id="comments" name="comments" value="" ></textarea>								
+											
+										</div>
+									</div>
+								</div>
+								<div class="control-group">
+									<!-- Button -->
+									<div class="controls">
+									
+										<button class="btn btn-primary" type="button" value="send" id="submitBtn">Send Message!</button>
+										
+									</div>
+								</div>
+							</fieldset> 
+						</div>
+					</form>
+							
+					<div class="span3">
+						<fieldset>
+							<legend>Connect with me</legend>
+							<div class="control-group">
+								<a href="http://www.facebook.com/desngwq" target="_blank">
+								<img src="img/facebook.png"></a>
+
+								<a href="http://sg.linkedin.com/in/desngwq" target="_blank" >
+								<img src="img/linkedin.png"></a>
+
+								<a href="https://twitter.com/desngwq" target="_blank" >
+								<img src="img/twitter.png"></a>
+
+								<a href="skype:desng2809?call">
+								<img src="img/skype.png"></a>
+
+								<a href="http://www.youtube.com/user/1988ronaldo" target="_blank" >
+								<img src="img/youtube.png"></a>
+								
+								<a href="mailto:desngwq@outlook.com?">
+								<img src="img/outlook.png"></a/>
+								
+								<a href="https://plus.google.com/u/0/109680624657056931806/posts" target="_blank" >
+								<img src="img/google+.png"></a>
+								
+								
+							</div>
+						</fieldset>
+						
+						<div class="fb-like" data-href="http://is2150-22.comp.nus.edu.sg/is2150/index.html" data-send="false" data-width="200" data-show-faces="true" data-font="arial" data-colorscheme="dark"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="container">
+			<!-- 4 columns of text below the carousel -->
+			<div class="span"></div>
+			<div class="span"></div>
+
+			<div class="span2">
+				<a href="index.html"><img src="img/about.jpg" alt="About" href="index.html"></a>
+			</div><!-- /.span2 -->
+			
+			<div class="span"></div>
+			<div class="span"></div>
+			
+			<div class="span2">
+				<a href="resume.html"><img src="img/resume.jpg" alt="Journey" href="resume.html"></a>
+			</div><!-- /.span2 -->
+				
+			<div class="span"></div>
+			<div class="span"></div>
+				
+			<div class="span2">
+				<a href="gallery.html"><img src="img/gallery.png" alt="Gallery" href="gallery.html"></a>
+			</div><!-- /.span2 -->
+				
+			<div class="span"></div>
+			<div class="span"></div>
+			
+			<div class="span2">
+				<a href="contact.html"><img src="img/Contact.png" alt="Contact" href="contact.html"></a>			
+			</div><!-- /.span2 -->
+		</div>
+		
+		<div class="container">
+		
+			<div class="span"></div>
+			<div class="span"></div>
+			
+			<div class="span2">
+				<a href="index.html"><h3>About</h3></a>
+			</div><!-- /.span2 -->
+			
+			<div class="span"></div>
+			<div class="span"></div>
+			
+			<div class="span2">
+				<a href="resume.html"><h3>Resume</h3></a>
+			</div><!-- /.span2 -->
+				
+			<div class="span"></div>
+			<div class="span"></div>
+				
+			<div class="span2">
+				<a href="gallery.html"><h3>Gallery</h3></a>
+			</div><!-- /.span2 -->
+				
+			<div class="span"></div>
+			<div class="span"></div>
+			
+			<div class="span2">
+				<a href="contact.html"><h3>Contact</h3></a>
+			</div><!-- /.span2 -->
+		</div>
+		
+		<div class="container">
+			<div class="span"></div>
+			<div class="span"></div>
+			
+			<div class="span2">
+				<a href="index.html"><p>More insides of me..</p></a>
+			</div><!-- /.span2 -->
+			
+			<div class="span"></div>
+			<div class="span"></div>
+			
+			<div class="span2">
+				<a href="resume.html"><p>My Experiences & Skills..</p></a>
+			</div><!-- /.span2 -->
+				
+			<div class="span"></div>
+			<div class="span"></div>
+				
+			<div class="span2">
+				<a href="gallery.html"><p>My Life</p></a>
+			</div><!-- /.span2 -->
+				
+			<div class="span"></div>
+			<div class="span"></div>
+			
+			<div class="span2">
+				<a href="contact.html"><p>Connect with me</p></a>
+			</div><!-- /.span2 -->
+			
+		</div>
+		
+		<div class="container">
+			<div class="navbar navbar-inverse" style="padding: 0px;">
+				<div class="navbar-inner" style="border-radius:10px 10px 0px 0px; padding-left: 10px; min-height: 20px;">
+					<p class="footnote">Copyright &copy; 2013 Ng Wei Quan Desmond.</p>
+				</div><!-- /.navbar-inner -->
+			</div><!-- /.navbar -->			
+		</div>
+		
+    </body>
+</html>
